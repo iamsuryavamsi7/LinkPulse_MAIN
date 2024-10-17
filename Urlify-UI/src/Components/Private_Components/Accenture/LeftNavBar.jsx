@@ -14,6 +14,8 @@ import { FaTeamspeak } from 'react-icons/fa6';
 
 const LeftNavBar = () => {
 
+    const urlDirectory = document.location.pathname;
+
     const navigate = useNavigate();
 
     const [role, setRole] = useState(null);
@@ -124,106 +126,296 @@ const LeftNavBar = () => {
 
         fetchData();
 
-        const urlDirectory = document.location.pathname;
-
         if ( urlDirectory === '/' ) {
 
-            setTimeout(() => {
+            setDashBoardColor('text-[#66B2FF]');
 
-                setDashBoardColor('text-[#66B2FF]');
+            setDashBoardColor2('bg-gray-300')
 
-                setDashBoardColor2('bg-gray-300')
+            setTimeSheetsColor(`text-black`)
 
-            }, 500);
+            setEmployeeApprovalColor(`text-black`)
+
+            setInsightsColor(`text-black`)
+
+            setAttendenceManagementColor(`text-black`)
+
+            setLeaveRequestColor(`text-black`)
+
+            setReportsColor(`text-black`)
+
+            setMyTeamColor(`text-black`)
+
+            setTimeSheetsColor2(null)
+
+            setEmployeeApprovalColor2(null)
+
+            setInsightsColor2(null)
+
+            setAttendenceManagementColor2(null)
+
+            setLeaveRequestColor2(null)
+
+            setReportsColor2(null)
+
+            setMyTeamColor2(null)
 
         }
 
         if ( urlDirectory === '/time-sheets' ) {
 
-            setTimeout(() => {
+            setDashBoardColor(`text-black`)
 
-                setTimeSheetsColor('text-[#66B2FF]');
+            setDashBoardColor2(null)
 
-                setTimeSheetsColor2('bg-gray-300')
+            setTimeSheetsColor('text-[#66B2FF]');
 
-            }, 500);
+            setTimeSheetsColor2('bg-gray-300')
+
+            setEmployeeApprovalColor(`text-black`)
+
+            setInsightsColor(`text-black`)
+
+            setAttendenceManagementColor(`text-black`)
+
+            setLeaveRequestColor(`text-black`)
+
+            setReportsColor(`text-black`)
+
+            setMyTeamColor(`text-black`)
+
+            setEmployeeApprovalColor2(null)
+
+            setInsightsColor2(null)
+
+            setAttendenceManagementColor2(null)
+
+            setLeaveRequestColor2(null)
+
+            setReportsColor2(null)
+
+            setMyTeamColor2(null)
 
         }
 
         if ( urlDirectory === '/employee-approval' ) {
 
-            setTimeout(() => {
+            setDashBoardColor2(null)
 
-                setEmployeeApprovalColor('text-[#66B2FF]');
+            setTimeSheetsColor2(null)
 
-                setEmployeeApprovalColor2('bg-gray-300')
+            setEmployeeApprovalColor('text-[#66B2FF]');
 
-            }, 500);
+            setEmployeeApprovalColor2('bg-gray-300')
+
+            setInsightsColor2(null)
+
+            setAttendenceManagementColor2(null)
+
+            setLeaveRequestColor2(null)
+
+            setReportsColor2(null)
+
+            setMyTeamColor2(null)
+
+            setDashBoardColor(`text-black`)
+
+            setInsightsColor(`text-black`)
+
+            setAttendenceManagementColor(`text-black`)
+
+            setLeaveRequestColor(`text-black`)
+
+            setReportsColor(`text-black`)
+
+            setMyTeamColor(`text-black`)
+
+            setTimeSheetsColor(`text-black`)
 
         }
 
         if ( urlDirectory === '/insights' ) {
 
-            setTimeout(() => {
+            setDashBoardColor(`text-black`)
 
-                setInsightsColor('text-[#66B2FF]');
+            setTimeSheetsColor(`text-black`)
 
-                setInsightsColor2('bg-gray-300')
+            setEmployeeApprovalColor(`text-black`)
 
-            }, 500);
+            setAttendenceManagementColor(`text-black`)
+
+            setLeaveRequestColor(`text-black`)
+
+            setReportsColor(`text-black`)
+
+            setMyTeamColor(`text-black`)
+
+            setDashBoardColor2(null)
+
+            setTimeSheetsColor2(null)
+
+            setEmployeeApprovalColor2(null);
+
+            setInsightsColor('text-[#66B2FF]');
+
+            setInsightsColor2('bg-gray-300')
+
+            setAttendenceManagementColor2(null)
+
+            setLeaveRequestColor2(null)
+
+            setReportsColor2(null)
+
+            setMyTeamColor2(null)
 
         }
 
         if ( urlDirectory === '/attendence-management' ) {
 
-            setTimeout(() => {
+            setDashBoardColor2(null)
 
-                setAttendenceManagementColor('text-[#66B2FF]');
+            setTimeSheetsColor2(null)
 
-                setAttendenceManagementColor2('bg-gray-300')
+            setEmployeeApprovalColor2(null);
 
-            }, 500);
+            setInsightsColor2(null)
+
+            setAttendenceManagementColor('text-[#66B2FF]');
+
+            setAttendenceManagementColor2('bg-gray-300')
+
+            setLeaveRequestColor2(null)
+
+            setReportsColor2(null)
+
+            setMyTeamColor2(null)
+
+            setDashBoardColor(`text-black`)
+
+            setTimeSheetsColor(`text-black`)
+
+            setEmployeeApprovalColor(`text-black`)
+
+            setInsightsColor(`text-black`)
+
+            setLeaveRequestColor(`text-black`)
+
+            setReportsColor(`text-black`)
+
+            setMyTeamColor(`text-black`)
 
         }
 
         if ( urlDirectory === '/leave-request' ) {
 
-            setTimeout(() => {
+            setDashBoardColor(`text-black`)
 
-                setLeaveRequestColor('text-[#66B2FF]');
+            setTimeSheetsColor(`text-black`)
 
-                setLeaveRequestColor2('bg-gray-300')
+            setEmployeeApprovalColor(`text-black`)
 
-            }, 500);
+            setInsightsColor(`text-black`)
+
+            setAttendenceManagementColor(`text-black`)
+
+            setReportsColor(`text-black`)
+
+            setMyTeamColor(`text-black`)
+
+            setDashBoardColor2(null)
+
+            setTimeSheetsColor2(null)
+
+            setEmployeeApprovalColor2(null);
+
+            setInsightsColor2(null)
+
+            setAttendenceManagementColor2(null)
+
+            setLeaveRequestColor('text-[#66B2FF]');
+
+            setLeaveRequestColor2('bg-gray-300')
+
+            setReportsColor2(null)
+
+            setMyTeamColor2(null)
 
         }
 
 
         if ( urlDirectory === '/reports' ) {
 
-            setTimeout(() => {
+            setDashBoardColor(`text-black`)
 
-                setReportsColor('text-[#66B2FF]');
+            setTimeSheetsColor(`text-black`)
 
-                setReportsColor2('bg-gray-300')
+            setEmployeeApprovalColor(`text-black`)
 
-            }, 500);
+            setInsightsColor(`text-black`)
+
+            setAttendenceManagementColor(`text-black`)
+
+            setLeaveRequestColor(`text-black`)
+
+            setMyTeamColor(`text-black`)
+
+            setDashBoardColor2(null)
+
+            setTimeSheetsColor2(null)
+
+            setEmployeeApprovalColor2(null);
+
+            setInsightsColor2(null)
+
+            setAttendenceManagementColor2(null)
+
+            setLeaveRequestColor2(null)
+
+            setReportsColor('text-[#66B2FF]');
+
+            setReportsColor2('bg-gray-300')
+
+            setMyTeamColor2(null)
 
         }
 
         if ( urlDirectory === '/teams' ) {
 
-            setTimeout(() => {
+            setDashBoardColor(`text-black`)
 
-                setMyTeamColor('text-[#66B2FF]');
+            setTimeSheetsColor(`text-black`)
 
-                setMyTeamColor2('bg-gray-300')
+            setEmployeeApprovalColor(`text-black`)
 
-            }, 500);
+            setInsightsColor(`text-black`)
+
+            setAttendenceManagementColor(`text-black`)
+
+            setLeaveRequestColor(`text-black`)
+
+            setReportsColor('text-black');
+
+            setDashBoardColor2(null)
+
+            setTimeSheetsColor2(null)
+
+            setEmployeeApprovalColor2(null);
+
+            setInsightsColor2(null)
+
+            setAttendenceManagementColor2(null)
+
+            setLeaveRequestColor2(null)
+
+            setReportsColor2(null);
+
+            setMyTeamColor('text-[#66B2FF]');
+
+            setMyTeamColor2('bg-gray-300')
 
         }
 
-    }, []);
+    }, [urlDirectory]);
 
     return (
 
