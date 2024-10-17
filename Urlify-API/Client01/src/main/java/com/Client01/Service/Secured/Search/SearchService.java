@@ -99,6 +99,7 @@ public class SearchService {
                 .userDesignation(fetchedUser.getDesignation())
                 .userRole(fetchedUser.getRole())
                 .projectName(fetchedUserProject != null ? fetchedUserProject.getProjectName() : null)
+                .profilePicUrl(fetchedUser.getProfilePicUrl())
                 .build();
 
     }

@@ -20,5 +20,6 @@ public class SearchUserByIdModel {
     private String userEmail;
     private String userDesignation;
     private String projectName;
+    private String profilePicUrl;
 
 }

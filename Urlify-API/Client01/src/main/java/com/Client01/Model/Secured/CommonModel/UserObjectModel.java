@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserObjectModel {
 
     private Long id;
+    private String profilePathUrl;
     private String firstName;
     private String lastName;
     private String email;

@@ -144,10 +144,6 @@ const Teams = () => {
 
             <>
 
-                <NavBar />
-
-                <LeftNavBar />
-
                 <div className="pl-[265px] pt-[60px]">
 
                     {projectData && projectData.length <= 0 && (

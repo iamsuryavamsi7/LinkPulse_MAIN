@@ -1,6 +1,4 @@
 import React from 'react'
-import LeftNavBar from './LeftNavBar'
-import NavBar from './NavBar/NavBar'
 import Dashboard from './Dashboard'
 
 const AccentureMainPage = () => {
@@ -9,10 +7,6 @@ const AccentureMainPage = () => {
 
         <>
         
-            <NavBar />
-
-            <LeftNavBar />
-
             <Dashboard />
 
         </>

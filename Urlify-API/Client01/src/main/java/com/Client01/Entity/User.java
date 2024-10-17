@@ -38,6 +38,8 @@ public class User implements UserDetails {
     @GeneratedValue
     private Long id;
 
+    private String profilePicUrl;
+
     @NotNull
     private String firstName;
 

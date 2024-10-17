@@ -299,8 +299,6 @@ const EmployeeApproval = () => {
 
             {role === roles.ADMIN && (
                 <>
-                    <NavBar />
-                    <LeftNavBar />
                     <div className="pl-[265px] pt-[120px] w-full flex">
 
                         <div className="flex w-full relative mt-5">

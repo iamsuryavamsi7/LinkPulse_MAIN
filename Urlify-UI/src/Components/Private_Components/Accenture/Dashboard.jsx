@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import NavBar from './NavBar/NavBar';
-import LeftNavBar from './LeftNavBar';
-import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 const Dashboard = () => {
@@ -36,10 +33,6 @@ const Dashboard = () => {
             {role === admin && (
 
                 <>
-
-                    <NavBar />
-
-                    <LeftNavBar />
 
                     <div className="pl-[265px] pt-[60px]">
 

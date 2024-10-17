@@ -229,7 +229,7 @@ const LeftNavBar = () => {
 
         <>
         
-            <div className="top-[80px] left-0 bottom-0 fixed text-center z-40 border-r-[1px] border-gray-400 flex flex-col">
+            <div className="bg-[#F0F2F5] top-[80px] left-0 bottom-0 fixed text-center z-40 border-r-[1px] border-gray-400 flex flex-col">
 
                 {role === admin && (
 

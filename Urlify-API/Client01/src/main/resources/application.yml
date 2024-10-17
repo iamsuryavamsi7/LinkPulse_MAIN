@@ -26,11 +26,11 @@ spring:
 
 cloud:
   aws:
-    region: us-east-1
+    region: ap-south-1
     keys:
-      access-key: AKIA3DQFZSRKJJRSS74W
-      secret-key: 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
-    bucket-name: teamupx-storage-test
+      access-key: AKIA3DQFZSRKCJD7RLHI
+      secret-key: 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
+    bucket-name: teamupxbucketdevelopment
 
 # Values for JwtService
 

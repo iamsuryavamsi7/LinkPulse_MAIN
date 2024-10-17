@@ -29,10 +29,6 @@ const Insights = () => {
 
             <>
 
-                <NavBar />
-
-                <LeftNavBar />
-
                 <div className="pl-[265px] pt-[60px]">
 
                     Insights

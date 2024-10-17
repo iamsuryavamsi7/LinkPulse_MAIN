@@ -1,18 +1,20 @@
 package com.Client01.Service.Secured.S3;
 
+import com.Client01.Entity.User;
+import com.Client01.Repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.model.GetObjectResponse;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +25,19 @@ public class S3Service {
 
     private final S3Client s3;
 
+    private final UserRepo userRepo;
+
     public String uploadFile(MultipartFile file) throws IOException {
 
-        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        String originalFileName = file.getOriginalFilename();
+
+        if ( originalFileName != null ){
+
+            originalFileName = originalFileName.replace(" ", "_");
+
+        }
+
+        String fileName = System.currentTimeMillis() + "_" + originalFileName;
 
         PutObjectRequest objectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
@@ -64,6 +76,53 @@ public class S3Service {
             return null; // or handle exception as needed
 
         }
+
+    }
+
+    public String uploadProfilePic(
+            MultipartFile file,
+            Long userId
+    ) throws IOException {
+
+        User fetchedUser = userRepo.findById(userId).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
+
+        deleteS3Object(fetchedUser.getProfilePicUrl());
+
+        String originalFileName = file.getOriginalFilename();
+
+        if ( originalFileName != null ){
+
+            originalFileName = originalFileName.replace(" ", "_");
+
+        }
+
+        String fileName = System.currentTimeMillis() + "_" + originalFileName;
+
+        PutObjectRequest objectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(fileName)
+                .build();
+
+        s3.putObject(objectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+
+        fetchedUser.setProfilePicUrl(fileName);
+
+        userRepo.save(fetchedUser);
+
+        return "Uploaded";
+
+    }
+
+    private void deleteS3Object(String fileName){
+
+        DeleteObjectRequest objectRequest = DeleteObjectRequest.builder()
+                .bucket(bucketName)
+                .key(fileName)
+                .build();
+
+        DeleteObjectResponse objectResponse = s3.deleteObject(objectRequest);
 
     }
 

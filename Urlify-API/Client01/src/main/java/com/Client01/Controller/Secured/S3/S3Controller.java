@@ -52,5 +52,16 @@ public class S3Controller {
                 .body(object);
     }
 
+    @PostMapping("/uploadProfilePic")
+    public ResponseEntity<String> uploadProfilePic(
+            @RequestParam(value = "file") MultipartFile file,
+            @RequestParam(value = "userId") Long userId
+    ) throws IOException {
+
+        String message = service.uploadProfilePic(file, userId);
+
+        return ResponseEntity.ok(message);
+
+    }
 
 }

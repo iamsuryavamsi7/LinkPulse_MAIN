@@ -43,6 +43,8 @@ public class CommonService {
 
         BeanUtils.copyProperties(fetchedUser, user);
 
+        user.setProfilePathUrl(fetchedUser.getProfilePicUrl());
+
         return user;
 
     }

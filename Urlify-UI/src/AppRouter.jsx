@@ -14,6 +14,8 @@ import HTML404 from './Components/Private_Components/Accenture/HTML404'
 import ManageProjects from './Components/Private_Components/Accenture/ManageProjects'
 import Teams from './Components/Private_Components/Accenture/Teams'
 import UserProfile from './Components/Private_Components/Accenture/Profiles/UserProfile'
+import NavBar from './Components/Private_Components/Accenture/NavBar/NavBar'
+import LeftNavBar from './Components/Private_Components/Accenture/LeftNavBar'
 
 export function AppRouter() {
 
@@ -37,6 +39,9 @@ export const AccentureRouter = () => {
 
 		<>
 
+			<NavBar />
+
+			<LeftNavBar />
 		
 			<Routes>
 

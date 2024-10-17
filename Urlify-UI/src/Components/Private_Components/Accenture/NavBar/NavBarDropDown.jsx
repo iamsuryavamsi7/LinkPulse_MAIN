@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillNotification } from 'react-icons/ai'
 import { IoIosSettings, IoMdHelpCircle } from 'react-icons/io'
 import { IoLogOut } from 'react-icons/io5'
@@ -8,9 +8,66 @@ import axios from 'axios'
 
 const NavBarDropDown = ({userData}) => {
 
-    const logoutFunction = async () => {
+    // JWT_TOKEN
+    const access_token = Cookies.get('access_token');
 
-        const access_token = Cookies.get('access_token');
+    // Profile pic source
+    const [imageSrc, setImageSrc] = useState(null);
+
+    const handleFetchError = (error) => {
+
+        if ( error.response ) {
+
+            if ( error.response.status === 403 ){
+
+                console.log(error.response.data);
+
+            } else {
+
+                console.log(error);
+
+            }
+
+        } else {
+
+            console.error('Error fetching data', error);
+
+        }
+
+    }
+
+    const fetchImage = async () => {
+
+        setImageSrc(null);
+
+        try{
+
+            const response = await axios.get(`http://localhost:7777/api/v1/files/display/${userData.profilePathUrl}`, {
+                responseType: 'blob',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                } 
+            });
+
+            if ( response.status === 200 ){
+
+                const imageBlob = URL.createObjectURL(response.data);
+
+                setImageSrc(imageBlob);
+
+            }
+
+        }catch(error){
+
+            handleFetchError(error);
+
+            setImageSrc(null);
+
+        }
+
+    }
+
+    const logoutFunction = async () => {
 
         try{
 
@@ -44,6 +101,12 @@ const NavBarDropDown = ({userData}) => {
 
     }
 
+    useEffect(() => {
+
+        fetchImage();
+
+    }, []);
+
     return (
 
         <>
@@ -58,10 +121,17 @@ const NavBarDropDown = ({userData}) => {
                         className='flex items-center space-x-2 w-full profileNavBar py-3 min-w-[300px] rounded-xl hover:bg-gray-200 active:opacity-[0.6] transition-all duration-300'
                     >
 
-                        <img 
-                            src='/testuser.png'
+                        {imageSrc ? (
+                            <img 
+                            src={imageSrc}
+                            className='h-[40px] w-auto object-cover rounded-[50%] ml-5'
+                            />
+                        ) : (
+                            <img 
+                            src='/emptyuser.jpeg'
                             className='h-[40px] w-auto object-cover rounded-[50%] ml-5'
                         />
+                        )}
 
                         <div className="block">
 

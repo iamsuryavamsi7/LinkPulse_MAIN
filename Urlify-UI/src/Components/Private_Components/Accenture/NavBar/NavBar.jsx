@@ -11,9 +11,13 @@ import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
 
+    // JWT Token
     const access_token = Cookies.get('access_token');
 
+    // Navigate Hook
     const navigate = useNavigate();
+
+// States for temporary storage's
 
     const [searchResultActive, setSearchResultActive] = useState(false);
 
@@ -45,6 +49,11 @@ const NavBar = () => {
     const [notificationActive, setNotificationActive] = useState(false);
 
     const [profileViewTurnedOn, setProfileViewTurnedOn] = useState(false);
+
+    // To store the profile pic imageSrc
+    const [imageSrc, setImageSrc] = useState(null);
+
+// Functions
 
     // Check In Arrow Function
     const arrowRightToBracketFunction = () => {
@@ -258,46 +267,40 @@ const NavBar = () => {
 
     }
 
-    useEffect(() => {
+    const fetchUserData = async () => {
 
-        if ( !access_token ) {
+        try{
 
-            // window.open('http://localtest.me:7778/', "_self");
-
-        }
-
-        const fetchUserData = async () => {
-
-            try{
-
-                const response = await axios.post('http://localhost:7777/api/v1/common/getUserObject', {
-                    accessToken: access_token
-                }, {
-                    headers: {
-                        'Authorization': `Bearer ${access_token}`
-                    }
-                } )
-
-                if ( response.status === 200 ){
-
-                    setUserData(response.data);   
-
+            const response = await axios.post('http://localhost:7777/api/v1/common/getUserObject', {
+                accessToken: access_token
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
                 }
+            } )
 
-            }catch (error){
+            if ( response.status === 200 ){
 
-                if ( error.response ){
+                const userData = response.data;
 
-                    if ( error.response.status === 403 ){
+                setUserData(userData);   
 
-                        // Cookies.remove('access_token', {
-                        //     path: '/',
-                        //     domain: '.localtest.me'
-                        // })
+                fetchImage(userData);
 
-                        // window.open('http://localtest.me:7778/', '_self')
+            }
 
-                    }
+        }catch (error){
+
+            if ( error.response ){
+
+                if ( error.response.status === 403 ){
+
+                    // Cookies.remove('access_token', {
+                    //     path: '/',
+                    //     domain: '.localtest.me'
+                    // })
+
+                    // window.open('http://localtest.me:7778/', '_self')
 
                 }
 
@@ -305,20 +308,66 @@ const NavBar = () => {
 
         }
 
-        fetchUserData();
+    }
 
-        if ( notificationCount === 0 ) {
+    // Function to fetch profile pic
+    const fetchImage = async (userData) => {
 
-            setNotificationCount(null);
+        setImageSrc(null);
+
+        try{
+
+            const response = await axios.get(`http://localhost:7777/api/v1/files/display/${userData.profilePathUrl}`, {
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                },
+                responseType: 'blob'
+            });
+
+            if( response.status === 200 ){
+
+                const imageBlob = URL.createObjectURL(response.data);
+
+                setImageSrc(imageBlob);
+
+            }
+
+        }catch(error){
+
+            handleFetchError(error);
+
+            setImageSrc(null);
 
         }
 
-        if ( notificationCount > 9 ) {
+    }
 
-            setNotificationCount("9+");
+// UseEffect Hook
+
+    useEffect(() => {
+
+        if ( !access_token ) {
+
+            // window.open('http://localtest.me:7778/', "_self");
+
+        } else {
+
+            fetchUserData();
+
+            if ( notificationCount === 0 ) {
+
+                setNotificationCount(null);
+    
+            }
+    
+            if ( notificationCount > 9 ) {
+    
+                setNotificationCount("9+");
+    
+            }
 
         }
-
+        
     }, []);
 
     return (
@@ -527,10 +576,21 @@ const NavBar = () => {
                         onClick={profileNavFunction}
                     >
 
-                        <img 
-                            src='/testuser.png'
-                            className='h-[40px] w-auto object-cover rounded-[50%]'
-                        />
+                        {imageSrc ? (
+
+                            <img 
+                                src={imageSrc}
+                                className='h-[40px] w-auto object-cover rounded-[50%]'
+                            />
+
+                        ): (
+
+                            <img 
+                                src='/emptyuser.jpeg'
+                                className='h-[40px] w-auto object-cover rounded-[50%]'
+                            />
+
+                        )}
 
                     </div>
 

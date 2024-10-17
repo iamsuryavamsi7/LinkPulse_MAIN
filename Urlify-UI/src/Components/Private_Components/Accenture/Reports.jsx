@@ -37,10 +37,6 @@ const Reports = () => {
 
             <>
 
-                <NavBar />
-
-                <LeftNavBar />
-
                 <div className="pl-[265px] pt-[60px]">
 
                     Time Sheets

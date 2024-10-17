@@ -37,10 +37,6 @@ const TimeSheets = () => {
 
             <>
 
-                <NavBar />
-
-                <LeftNavBar />
-
                 <div className="pl-[265px] pt-[60px]">
 
                     Time Sheets
